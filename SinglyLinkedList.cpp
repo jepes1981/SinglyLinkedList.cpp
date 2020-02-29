@@ -102,10 +102,10 @@ public:
         {
             if (midtracker->data == _target)
             {
-                node *temp = new node;
-                temp->data = _value;
-                temp->next = midtracker;
-                prev_marker->next = temp;
+                node *newnode = new node; //renamed temp to newnode for clarity
+                newnode->data = _value;
+                newnode->next = midtracker;
+                prev_marker->next = newnode;
                 return;
             }
             prev_marker = midtracker;
@@ -117,7 +117,7 @@ public:
     void insertNodeA(int _target, int _value) // insert _value after _target
     {
         node *marker = head;
-        node *temp = nullptr;
+        // node *temp = nullptr; // useless variable
         if ((head == nullptr) && (tail == nullptr)) //there are no entries
         {
             std::cout << "there are no entries found. use addNode instead " << std::endl;
@@ -129,9 +129,10 @@ public:
             {
                 node *newnode = new node();
                 newnode->data = _value;
-                temp = marker;
+                // temp = marker;                    // this was useless
                 newnode->next = marker->next;
-                temp->next = newnode;
+                // temp->next = newnode;                 // was useless, new code just below
+                marker->next = newnode;
                 if (marker == tail)
                 {
                     tail = newnode;
@@ -295,11 +296,11 @@ int main()
     list myList;
     int options{99}, target{0}, value{0};
 
-    myList.appendNode(1);
     myList.appendNode(5);
-    myList.appendNode(2);
-    myList.appendNode(3);
     myList.appendNode(4);
+    myList.appendNode(3);
+    myList.appendNode(2);
+    myList.appendNode(1);
 
     while (options)
     {
